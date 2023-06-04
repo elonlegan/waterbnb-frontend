@@ -1,0 +1,30 @@
+<div
+  class="rounded overflow-hidden shadow flex items-center justify-between"
+  [ngStyle]="{ 'background-color': room.color }"
+>
+  <img class="h-14 w-14 object-cover" [src]="room.imageUrl" alt="room image" />
+  <div class="px-2 py-2">
+    <h3 class="font-bold text-xl text-center text-slate-50">
+      {{ room.title }}
+    </h3>
+  </div>
+  <div *ngIf="account.role === Role.Admin" class="pe-2 py-2 flex">
+    <a
+      routerLink="edit/{{ room.id }}"
+      class="btn btn-sm btn-primary me-1 d-block w-full text-white font-bold py-2 px-4 rounded shadow"
+    >
+      Edit
+    </a>
+    <button
+      (click)="onDelete(room.id)"
+      class="btn btn-sm btn-danger d-block w-full text-white font-bold py-2 px-4 rounded shadow"
+      [disabled]="room.isDeleting"
+    >
+      <span
+        *ngIf="room.isDeleting"
+        class="spinner-border spinner-border-sm"
+      ></span>
+      <span *ngIf="!room.isDeleting">Delete</span>
+    </button>
+  </div>
+</div>

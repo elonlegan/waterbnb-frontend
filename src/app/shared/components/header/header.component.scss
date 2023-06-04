@@ -1,0 +1,12 @@
+.header {
+  nav {
+    border-top: solid 4px var(--color-main);
+
+    a {
+      &:hover,
+      &.active {
+        color: var(--color-main);
+      }
+    }
+  }
+}

@@ -1,0 +1,116 @@
+<header class="header" *ngIf="account; else publicHeader">
+  <nav class="shadow-lg border-t-4 border-blue-500 bg-gray-900">
+    <div class="px-4">
+      <div class="flex justify-between">
+        <div class="flex space-x-7">
+          <div>
+            <a href="/" class="flex items-center py-4 px-2">
+              <span class="font-semibold text-white text-lg"> Waterbnb </span>
+            </a>
+          </div>
+        </div>
+        <div class="hidden md:flex items-center space-x-1">
+          <a
+            routerLink="/hotels"
+            routerLinkActive="active"
+            class="py-4 px-2 text-gray-400 font-semibold transition duration-300 nav-item nav-link"
+          >
+            Hotels
+          </a>
+          <a
+            routerLink="/profile"
+            routerLinkActive="active"
+            class="py-4 px-2 text-gray-400 font-semibold transition duration-300 nav-item nav-link"
+          >
+            Profile
+          </a>
+          <a
+            *ngIf="account.role === Role.Admin"
+            routerLink="/accounts"
+            routerLinkActive="active"
+            class="py-4 px-2 text-gray-400 font-semibold transition duration-300 nav-item nav-link"
+          >
+            Accounts
+          </a>
+          <a
+            (click)="logout()"
+            class="bg-gray-500 text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-red-800 transition duration-300"
+          >
+            Logout
+          </a>
+        </div>
+        <div class="flex md:hidden">
+          <button
+            (click)="toggleMenu()"
+            class="inline-flex items-center justify-center p-2 rounded-md text-white text-xl"
+          >
+            <svg
+              stroke="currentColor"
+              fill="currentColor"
+              stroke-width="0"
+              viewBox="0 0 512 512"
+              height="1em"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M32 96v64h448V96H32zm0 128v64h448v-64H32zm0 128v64h448v-64H32z"
+              ></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div [ngClass]="{ hidden: responsiveMenu }" class="transition duration-300">
+      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 md:hidden">
+        <a
+          routerLink="/hotels"
+          routerLinkActive="active"
+          class="cursor-pointer text-gray-400 block px-3 py-2 rounded-md text-base font-medium transition duration-300 nav-item nav-link"
+        >
+          Hotels
+        </a>
+        <a
+          routerLink="/profile"
+          routerLinkActive="active"
+          class="cursor-pointer text-gray-400 block px-3 py-2 rounded-md text-base font-medium transition duration-300 nav-item nav-link"
+        >
+          Profile
+        </a>
+        <a
+          *ngIf="account.role === Role.Admin"
+          routerLink="/accounts"
+          routerLinkActive="active"
+          class="cursor-pointer text-gray-400 block px-3 py-2 rounded-md text-base font-medium transition duration-300 nav-item nav-link"
+        >
+          Accounts
+        </a>
+
+        <a
+          (click)="logout()"
+          class="cursor-pointer bg-gray-500 text-white block px-3 py-2 hover:bg-red-800 rounded-md text-base font-medium transition duration-300"
+        >
+          Logout
+        </a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<ng-template #publicHeader>
+  <header class="header">
+    <nav class="shadow-lg border-t-4 border-blue-500 bg-gray-900">
+      <div class="px-4">
+        <div class="flex justify-between">
+          <div class="flex space-x-7">
+            <div>
+              <a href="#" class="flex items-center py-4 px-2">
+                <span class="font-semibold text-white text-lg"> Waterbnb </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+</ng-template>

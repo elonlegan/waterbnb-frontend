@@ -1,0 +1,15 @@
+﻿<div class="app-container" [ngClass]="account ? 'bg-light' : 'bg-gray-200'">
+  <!-- main nav -->
+  <app-header></app-header>
+
+  <!-- global alert -->
+  <alert></alert>
+
+  <!-- main router outlet -->
+  <div class="height-container">
+    <router-outlet></router-outlet>
+  </div>
+
+  <!-- footer -->
+  <app-footer></app-footer>
+</div>

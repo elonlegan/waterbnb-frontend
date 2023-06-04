@@ -1,0 +1,21 @@
+﻿<div class="p-4">
+  <div class="container">
+    <h1 class="text-3xl font-bold leading-7 mb-4 text-center">Hotels</h1>
+    <a
+      *ngIf="account.role === Role.Admin"
+      routerLink="add"
+      class="btn btn-sm btn-success mb-4 text-white font-bold py-2 px-4 rounded"
+    >
+      Create Hotel
+    </a>
+    <div class="hotel-grid">
+      <ng-container *ngFor="let hotel of hotels">
+        <app-hotel-card
+          [hotel]="hotel"
+          [account]="account"
+          (delete)="deleteHotel($event)"
+        ></app-hotel-card>
+      </ng-container>
+    </div>
+  </div>
+</div>
