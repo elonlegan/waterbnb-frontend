@@ -41,9 +41,7 @@ export class AddEditComponent implements OnInit {
     private http: HttpClient,
     private hotelService: HotelService,
     private citiesService: CitiesService
-  ) {
-    this.cities = this.citiesService.getAll();
-  }
+  ) {}
 
   ngOnInit() {
     this.hotelId = this.route.snapshot.params['hotelId'];
@@ -61,6 +59,8 @@ export class AddEditComponent implements OnInit {
     this.form = this.formBuilder.group({
       name: ['', Validators.required],
       description: [''],
+      country: ['', Validators.required],
+      state: ['', Validators.required],
       city: ['', Validators.required],
       imageUrl: ['', this.isAddMode ? '' : Validators.nullValidator],
     });

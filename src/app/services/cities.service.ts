@@ -5,30 +5,17 @@ import * as countrycitystatejson from 'countrycitystatejson';
   providedIn: 'root',
 })
 export class CitiesService {
-  countries = [];
-  cities = [];
-
   private countryData = countrycitystatejson;
 
-  getAll() {
-    this.countries = this.countryData.getCountries();
+  getCountries() {
+    return this.countryData.getCountries();
+  }
 
-    for (let country of this.countries) {
-      let states = this.countryData.getStatesByShort(country.shortName);
-      for (let state of states) {
-        this.cities = [
-          ...this.cities,
-          ...this.countryData
-            .getCities(country.shortName, state)
-            .map((city) => {
-              return {
-                name: city,
-                country: country,
-              };
-            }),
-        ];
-      }
-    }
-    return this.cities;
+  getStatesByCountry(countryShotName: string) {
+    return this.countryData.getStatesByShort(countryShotName);
+  }
+
+  getCitiesByState(country: string, state: string) {
+    return this.countryData.getCities(country, state);
   }
 }
