@@ -1,10 +1,7 @@
 ﻿export class Hotel {
   id: string;
-  title: string;
+  name: string;
   description: string;
   imageUrl: string;
-  date: Date;
-  url: string;
-  repositoryUrl: string;
   isDeleting?: boolean;
 }

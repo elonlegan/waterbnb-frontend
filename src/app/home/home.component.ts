@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
     console.log(this.hotelSearch);
 
     this.hotels = this.allHotels.filter((hotel) =>
-      hotel.title.includes(this.hotelSearch)
+      hotel.name.includes(this.hotelSearch)
     );
   }
 }

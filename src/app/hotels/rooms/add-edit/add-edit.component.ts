@@ -7,9 +7,10 @@ import {
 } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
-import { RoomService, AlertService } from '@app/services';
+import { RoomService, AlertService, HotelService } from '@app/services';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@environments/environment';
+import { Hotel } from '@app/models';
 
 @Component({ templateUrl: 'add-edit.component.html' })
 export class AddEditComponent implements OnInit {
@@ -21,16 +22,29 @@ export class AddEditComponent implements OnInit {
   isValidImage: boolean = false;
   image: any;
 
+  hotelId: string;
+  hotel: Hotel;
+
   constructor(
     private formBuilder: UntypedFormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private roomService: RoomService,
     private alertService: AlertService,
-    private http: HttpClient
+    private http: HttpClient,
+    private hotelService: HotelService
   ) {}
 
   ngOnInit() {
+    this.hotelId = this.route.snapshot.params['hotelId'];
+
+    this.hotelService
+      .getById(this.hotelId)
+      .pipe(first())
+      .subscribe((hotel) => {
+        this.hotel = hotel;
+      });
+
     this.id = this.route.snapshot.params['id'];
     this.isAddMode = !this.id;
 

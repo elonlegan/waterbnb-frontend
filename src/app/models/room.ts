@@ -1,9 +1,7 @@
 ﻿export class Room {
   id?: string;
-  title: string;
-  color: string;
-  url?: string;
+  name: string;
   imageUrl?: string;
-  customStyles?: string;
+  description?: string;
   isDeleting?: boolean;
 }
