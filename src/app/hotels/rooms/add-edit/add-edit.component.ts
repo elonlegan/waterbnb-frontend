@@ -7,7 +7,12 @@ import {
 } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
-import { RoomService, AlertService, HotelService } from '@app/services';
+import {
+  RoomService,
+  AlertService,
+  HotelService,
+  CitiesService,
+} from '@app/services';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@environments/environment';
 import { Hotel } from '@app/models';
@@ -25,6 +30,8 @@ export class AddEditComponent implements OnInit {
   hotelId: string;
   hotel: Hotel;
 
+  cities = [];
+
   constructor(
     private formBuilder: UntypedFormBuilder,
     private route: ActivatedRoute,
@@ -32,8 +39,11 @@ export class AddEditComponent implements OnInit {
     private roomService: RoomService,
     private alertService: AlertService,
     private http: HttpClient,
-    private hotelService: HotelService
-  ) {}
+    private hotelService: HotelService,
+    private citiesService: CitiesService
+  ) {
+    this.cities = this.citiesService.getAll();
+  }
 
   ngOnInit() {
     this.hotelId = this.route.snapshot.params['hotelId'];
@@ -51,6 +61,7 @@ export class AddEditComponent implements OnInit {
     this.form = this.formBuilder.group({
       name: ['', Validators.required],
       description: [''],
+      city: ['', Validators.required],
       imageUrl: ['', this.isAddMode ? '' : Validators.nullValidator],
     });
 

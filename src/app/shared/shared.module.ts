@@ -7,6 +7,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HotelCardComponent } from './components/hotel-card/hotel-card.component';
 import { RoomCardComponent } from './components/room-card/room-card.component';
 import { TruncatePipe } from './pipes/truncate.pipe';
+import { CitySearchFilterPipe } from './pipes/city-search-filter.pipe';
+import { CityInputComponent } from './components/city-input/city-input.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +17,8 @@ import { TruncatePipe } from './pipes/truncate.pipe';
     HotelCardComponent,
     RoomCardComponent,
     TruncatePipe,
+    CitySearchFilterPipe,
+    CityInputComponent,
   ],
   imports: [CommonModule, RouterModule, ReactiveFormsModule],
   exports: [
@@ -23,6 +27,8 @@ import { TruncatePipe } from './pipes/truncate.pipe';
     HotelCardComponent,
     RoomCardComponent,
     TruncatePipe,
+    CityInputComponent,
+    CitySearchFilterPipe,
   ],
 })
 export class SharedModule {}

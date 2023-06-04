@@ -43,7 +43,15 @@
           />
         </div>
       </div>
-      <div class="form-row"></div>
+      <div class="form-row">
+        <app-city-input
+          formControlName="city"
+          [formGroup]="form"
+          [formControls]="f"
+          [submitted]="submitted"
+        >
+        </app-city-input>
+      </div>
 
       <div class="form-row">
         <div class="form-group col">

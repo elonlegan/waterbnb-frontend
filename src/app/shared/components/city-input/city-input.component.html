@@ -1,0 +1,19 @@
+<div class="form-group col" [formGroup]="formGroup">
+  <label class="block text-gray-700 text-sm font-bold mb-2"> City </label>
+  <input
+    type="text"
+    [formControlName]="formControlName"
+    class="form-control"
+    [ngClass]="{
+      'is-invalid': submitted && formControls[formControlName].errors
+    }"
+  />
+  <div
+    *ngIf="submitted && formControls[formControlName].errors"
+    class="invalid-feedback"
+  >
+    <div *ngIf="formControls[formControlName].errors.required">
+      Name is required
+    </div>
+  </div>
+</div>

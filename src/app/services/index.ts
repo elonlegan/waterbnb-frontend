@@ -2,3 +2,4 @@
 export * from './hotel.service';
 export * from './room.service';
 export * from './alert.service';
+export * from './cities.service';

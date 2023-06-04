@@ -6,7 +6,6 @@ import { RoomsRoutingModule } from './rooms-routing.module';
 import { RoomsComponent } from './index/rooms.component';
 import { AddEditComponent } from './add-edit/add-edit.component';
 import { SharedModule } from '@app/shared/shared.module';
-import { CodeEditorModule } from '@ngstack/code-editor';
 
 @NgModule({
   imports: [
@@ -14,7 +13,6 @@ import { CodeEditorModule } from '@ngstack/code-editor';
     ReactiveFormsModule,
     RoomsRoutingModule,
     SharedModule,
-    CodeEditorModule.forRoot(),
   ],
   declarations: [RoomsComponent, AddEditComponent],
 })
