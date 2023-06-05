@@ -74,6 +74,7 @@ export class AddEditComponent implements OnInit {
       type: ['', Validators.required],
       address: ['', Validators.required],
       price: ['', [Validators.required, Validators.min(1)]],
+      maxHost: ['', [Validators.required, Validators.min(1)]],
       imageUrl: ['', this.isAddMode ? '' : Validators.nullValidator],
     });
 

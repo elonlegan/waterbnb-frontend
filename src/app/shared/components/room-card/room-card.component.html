@@ -1,4 +1,4 @@
-<div class="rounded overflow-hidden shadow" style="min-width: 300px">
+<div class="rounded overflow-hidden shadow">
   <img
     class="w-full h-48 object-cover"
     [src]="room.imageUrl"
@@ -7,12 +7,39 @@
   <div class="px-6 py-4">
     <h3 class="font-bold text-3xl mb-2">{{ room.name }}</h3>
     <p class="text-gray-700 text-base">
+      {{ room.country }}, {{ room.state }},
+      <strong>
+        {{ room.city }}
+      </strong>
+    </p>
+    <p class="text-gray-700 text-base">
+      {{ room.address }}
+    </p>
+    <p class="text-gray-700 text-base">
+      {{ room.type }}
+    </p>
+    <p class="text-gray-700 text-base">
       {{ room.description }}
     </p>
+    <h2 class="text-gray-700 text-xl font-bold text-right">
+      {{ room.price | currency }}/night
+    </h2>
   </div>
-  <div *ngIf="account.role === Role.Admin" class="px-6 py-4">
+  <div *ngIf="account.role === Role.User" class="px-6 py-4">
     <a
-      routerLink="edit/{{ room.id }}"
+      routerLink="book/{{ room.id }}"
+      [queryParams]="params"
+      class="btn btn-sm btn-primary mb-1 d-block w-full text-white font-bold py-2 px-4 rounded"
+    >
+      Book
+    </a>
+  </div>
+  <div
+    *ngIf="account.role === Role.Admin || account.role === Role.TravelAgency"
+    class="px-6 py-4"
+  >
+    <a
+      routerLink="book/{{ room.id }}"
       class="btn btn-sm btn-primary mb-1 d-block w-full text-white font-bold py-2 px-4 rounded"
     >
       Edit

@@ -1,10 +1,15 @@
 ﻿import { Injectable } from '@angular/core';
-import { Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import {
+  Router,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+} from '@angular/router';
+import { Role } from '@app/models';
 
 import { AccountService } from '@app/services';
 
 @Injectable({ providedIn: 'root' })
-export class AuthGuard  {
+export class AuthGuard {
   constructor(private router: Router, private accountService: AccountService) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
@@ -13,7 +18,9 @@ export class AuthGuard  {
       // check if route is restricted by role
       if (route.data.roles && !route.data.roles.includes(account.role)) {
         // role not authorized so redirect to home page
-        this.router.navigate(['/']);
+        this.router.navigate([
+          account.role === Role.Admin ? '/home' : '/hotels',
+        ]);
         return false;
       }
 

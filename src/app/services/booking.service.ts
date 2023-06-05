@@ -1,32 +1,32 @@
-﻿import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { environment } from '@environments/environment';
-import { Room } from '@app/models';
+import { Booking } from '@app/models';
 
-const baseUrl = `${environment.apiUrl}/rooms`;
+const baseUrl = `${environment.apiUrl}/booking`;
 
 @Injectable({ providedIn: 'root' })
-export class RoomService {
+export class BookingService {
   constructor(private http: HttpClient) {}
 
   getAll() {
-    return this.http.get<Room[]>(baseUrl);
+    return this.http.get<Booking[]>(baseUrl);
   }
 
   getByHotel(hotelId: string) {
-    return this.http.get<Room[]>(`${baseUrl}/hotel/${hotelId}`);
+    return this.http.get<Booking[]>(`${baseUrl}/hotel/${hotelId}`);
   }
 
   getById(id: string) {
-    return this.http.get<Room>(`${baseUrl}/${id}`);
+    return this.http.get<Booking>(`${baseUrl}/${id}`);
   }
 
   searchBooking(params) {
-    return this.http.get<Room[]>(`${baseUrl}/search`, { params });
+    return this.http.get<Booking[]>(`${baseUrl}/search`, { params });
   }
 
-  getRoomTypes() {
+  getBookingTypes() {
     return this.http.get<any[]>(`${baseUrl}/room-types`);
   }
 

@@ -55,6 +55,10 @@ export class CityInputComponent {
           this.formControls['country'].value,
           state
         );
+
+        if (!this.cities.length) {
+          this.cities = [state];
+        }
         this.formControls['city'].enable();
       }
     });

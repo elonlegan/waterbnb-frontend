@@ -1,4 +1,4 @@
-<div class="rounded overflow-hidden shadow" style="min-width: 300px">
+<div class="rounded overflow-hidden shadow">
   <img
     class="w-full h-48 object-cover"
     [src]="hotel.imageUrl"
@@ -10,7 +10,10 @@
       {{ hotel.description }}
     </p>
   </div>
-  <div *ngIf="account.role === Role.Admin" class="px-6 py-4">
+  <div
+    *ngIf="account.role === Role.Admin || account.role === Role.TravelAgency"
+    class="px-6 py-4"
+  >
     <a
       routerLink="{{ hotel.id }}/rooms"
       class="btn btn-sm btn-success mb-1 d-block w-full text-white font-bold py-2 px-4 rounded"

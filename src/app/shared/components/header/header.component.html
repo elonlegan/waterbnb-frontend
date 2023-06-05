@@ -12,6 +12,9 @@
         <div class="hidden md:flex items-center space-x-1">
           <a
             routerLink="/hotels"
+            *ngIf="
+              account.role === Role.Admin || account.role === Role.TravelAgency
+            "
             routerLinkActive="active"
             class="py-4 px-2 text-gray-400 font-semibold transition duration-300 nav-item nav-link"
           >

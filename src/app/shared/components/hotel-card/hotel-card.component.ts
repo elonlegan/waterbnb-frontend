@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 
 import { Account, Hotel, Role } from '@app/models';
+import { AccountService } from '@app/services';
 
 @Component({
   selector: 'app-hotel-card',
@@ -13,7 +14,9 @@ export class HotelCardComponent implements OnInit {
   @Input() account: Account;
   @Output() delete: EventEmitter<any> = new EventEmitter();
 
-  constructor() {}
+  constructor(private accountService: AccountService) {
+    this.accountService.account.subscribe((res) => (this.account = res));
+  }
 
   ngOnInit(): void {}
 

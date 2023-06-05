@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { HomeComponent } from './home';
 import { AuthGuard } from './helpers';
-import { Role } from './models';
+import { Account, Role } from './models';
 
 const accountModule = () =>
   import('./account/account.module').then((x) => x.AccountModule);
@@ -13,12 +12,29 @@ const profileModule = () =>
   import('./profile/profile.module').then((x) => x.ProfileModule);
 const hotelsModule = () =>
   import('./hotels/hotels.module').then((x) => x.HotelsModule);
+const homeModule = () => import('./home/home.module').then((x) => x.HomeModule);
 
 const routes: Routes = [
-  { path: '', redirectTo: '/hotels', pathMatch: 'full' },
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'home',
+  },
+  {
+    path: 'home',
+    // pathMatch: 'full',
+    loadChildren: homeModule,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.User] },
+  },
   { path: 'account', loadChildren: accountModule },
   { path: 'profile', loadChildren: profileModule, canActivate: [AuthGuard] },
-  { path: 'hotels', loadChildren: hotelsModule, canActivate: [AuthGuard] },
+  {
+    path: 'hotels',
+    loadChildren: hotelsModule,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Admin, Role.TravelAgency] },
+  },
   {
     path: 'accounts',
     loadChildren: accountsModule,
@@ -27,7 +43,7 @@ const routes: Routes = [
   },
 
   // otherwise redirect to home
-  { path: '**', redirectTo: '' },
+  { path: '**', redirectTo: 'home' },
 ];
 
 @NgModule({

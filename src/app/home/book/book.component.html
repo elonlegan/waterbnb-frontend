@@ -1,0 +1,399 @@
+﻿<div class="p-4">
+  <div class="container">
+    <h1 class="text-3xl font-bold leading-7 mb-4 text-center">
+      Book {{ room.name }} Room
+    </h1>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="flex justify-between">
+        <h2 class="text-xl mb-1">Emergency Contact</h2>
+        <button
+          (click)="addEmergencyContact()"
+          class="btn-success text-white font-bold py-2 px-4 rounded focus:outline-none"
+        >
+          Add Host
+        </button>
+      </div>
+      <ng-container formArrayName="emergencyContacts">
+        <ng-container
+          *ngFor="
+            let emergencyContact of emergencyContacts().controls;
+            let i = index
+          "
+          [formGroupName]="i"
+        >
+          <div class="form-row">
+            <div class="form-group col">
+              <label class="block text-gray-700 text-sm font-bold mb-2">
+                First Name
+              </label>
+              <input
+                type="text"
+                formControlName="firstName"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid':
+                    submitted &&
+                    emergencyContacts().controls[i].controls.firstName.errors
+                }"
+              />
+              <div
+                *ngIf="
+                  submitted &&
+                  emergencyContacts().controls[i].controls.firstName.errors
+                "
+                class="invalid-feedback"
+              >
+                <div
+                  *ngIf="
+                    emergencyContacts().controls[i].controls.firstName.errors
+                      .required
+                  "
+                >
+                  First Name is required
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group col">
+              <label class="block text-gray-700 text-sm font-bold mb-2">
+                Last Name
+              </label>
+              <input
+                type="text"
+                formControlName="lastName"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid':
+                    submitted &&
+                    emergencyContacts().controls[i].controls.lastName.errors
+                }"
+              />
+              <div
+                *ngIf="
+                  submitted &&
+                  emergencyContacts().controls[i].controls.lastName.errors
+                "
+                class="invalid-feedback"
+              >
+                <div
+                  *ngIf="
+                    emergencyContacts().controls[i].controls.lastName.errors
+                      .required
+                  "
+                >
+                  Last Name is required
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group col">
+              <label class="block text-gray-700 text-sm font-bold mb-2">
+                Phone Number
+              </label>
+              <input
+                type="text"
+                formControlName="phoneNumber"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid':
+                    submitted &&
+                    emergencyContacts().controls[i].controls.phoneNumber.errors
+                }"
+              />
+              <div
+                *ngIf="
+                  submitted &&
+                  emergencyContacts().controls[i].controls.phoneNumber.errors
+                "
+                class="invalid-feedback"
+              >
+                <div
+                  *ngIf="
+                    emergencyContacts().controls[i].controls.phoneNumber.errors
+                      .required
+                  "
+                >
+                  Phone Number is required
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flex justify-end">
+            <button
+              (click)="removeEmergencyContact(i)"
+              class="btn-danger text-white font-bold py-2 px-4 rounded focus:outline-none"
+            >
+              Remove Emergency Contact
+            </button>
+          </div>
+          <hr class="rounded border-4 bg-gray-300 my-4" />
+        </ng-container>
+      </ng-container>
+
+      <div class="flex justify-between">
+        <h2 class="text-xl mb-1">Hosts</h2>
+        <button
+          (click)="addHost()"
+          class="btn-success text-white font-bold py-2 px-4 rounded focus:outline-none"
+        >
+          Add Host
+        </button>
+      </div>
+      <ng-container formArrayName="hosts">
+        <ng-container
+          *ngFor="let host of hosts().controls; let i = index"
+          [formGroupName]="i"
+        >
+          <div class="form-row">
+            <div class="form-group col">
+              <label class="block text-gray-700 text-sm font-bold mb-2">
+                First Name
+              </label>
+              <input
+                type="text"
+                formControlName="firstName"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid':
+                    submitted && hosts().controls[i].controls.firstName.errors
+                }"
+              />
+              <div
+                *ngIf="
+                  submitted && hosts().controls[i].controls.firstName.errors
+                "
+                class="invalid-feedback"
+              >
+                <div
+                  *ngIf="hosts().controls[i].controls.firstName.errors.required"
+                >
+                  First Name is required
+                </div>
+              </div>
+            </div>
+            <div class="form-group col">
+              <label class="block text-gray-700 text-sm font-bold mb-2">
+                Last Name
+              </label>
+              <input
+                type="text"
+                formControlName="lastName"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid':
+                    submitted && hosts().controls[i].controls.lastName.errors
+                }"
+              />
+              <div
+                *ngIf="
+                  submitted && hosts().controls[i].controls.lastName.errors
+                "
+                class="invalid-feedback"
+              >
+                <div
+                  *ngIf="hosts().controls[i].controls.lastName.errors.required"
+                >
+                  Last Name is required
+                </div>
+              </div>
+            </div>
+            <div class="form-group col">
+              <label class="block text-gray-700 text-sm font-bold mb-2">
+                Birth Date
+              </label>
+              <input
+                type="date"
+                formControlName="birthDate"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid':
+                    submitted && hosts().controls[i].controls.birthDate.errors
+                }"
+              />
+              <div
+                *ngIf="
+                  submitted && hosts().controls[i].controls.birthDate.errors
+                "
+                class="invalid-feedback"
+              >
+                <div
+                  *ngIf="hosts().controls[i].controls.birthDate.errors.required"
+                >
+                  Birth Date is required
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col">
+              <label class="block text-gray-700 text-sm font-bold mb-2">
+                Gender
+              </label>
+              <input
+                type="text"
+                formControlName="gender"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid':
+                    submitted && hosts().controls[i].controls.gender.errors
+                }"
+              />
+              <div
+                *ngIf="submitted && hosts().controls[i].controls.gender.errors"
+                class="invalid-feedback"
+              >
+                <div
+                  *ngIf="hosts().controls[i].controls.gender.errors.required"
+                >
+                  Gender is required
+                </div>
+              </div>
+            </div>
+            <div class="form-group col">
+              <label class="block text-gray-700 text-sm font-bold mb-2">
+                Document Type
+              </label>
+              <input
+                type="text"
+                formControlName="documentType"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid':
+                    submitted &&
+                    hosts().controls[i].controls.documentType.errors
+                }"
+              />
+              <div
+                *ngIf="
+                  submitted && hosts().controls[i].controls.documentType.errors
+                "
+                class="invalid-feedback"
+              >
+                <div
+                  *ngIf="
+                    hosts().controls[i].controls.documentType.errors.required
+                  "
+                >
+                  Document Type is required
+                </div>
+              </div>
+            </div>
+            <div class="form-group col">
+              <label class="block text-gray-700 text-sm font-bold mb-2">
+                Document Number
+              </label>
+              <input
+                type="number"
+                formControlName="documentNumber"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid':
+                    submitted &&
+                    hosts().controls[i].controls.documentNumber.errors
+                }"
+              />
+              <div
+                *ngIf="
+                  submitted &&
+                  hosts().controls[i].controls.documentNumber.errors
+                "
+                class="invalid-feedback"
+              >
+                <div
+                  *ngIf="
+                    hosts().controls[i].controls.documentNumber.errors.required
+                  "
+                >
+                  Document Number is required
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col">
+              <label class="block text-gray-700 text-sm font-bold mb-2">
+                Email
+              </label>
+              <input
+                type="text"
+                formControlName="email"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid':
+                    submitted && hosts().controls[i].controls.email.errors
+                }"
+              />
+              <div
+                *ngIf="submitted && hosts().controls[i].controls.email.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="hosts().controls[i].controls.email.errors.required">
+                  Email is required
+                </div>
+                <div *ngIf="hosts().controls[i].controls.email.errors.email">
+                  Email must be a valid email address
+                </div>
+              </div>
+            </div>
+            <div class="form-group col">
+              <label class="block text-gray-700 text-sm font-bold mb-2">
+                Phone Number
+              </label>
+              <input
+                type="text"
+                formControlName="phoneNumber"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid':
+                    submitted && hosts().controls[i].controls.phoneNumber.errors
+                }"
+              />
+              <div
+                *ngIf="
+                  submitted && hosts().controls[i].controls.phoneNumber.errors
+                "
+                class="invalid-feedback"
+              >
+                <div
+                  *ngIf="
+                    hosts().controls[i].controls.phoneNumber.errors.required
+                  "
+                >
+                  Phone Number is required
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flex justify-end">
+            <button
+              (click)="removeHost(i)"
+              class="btn-danger text-white font-bold py-2 px-4 rounded focus:outline-none"
+            >
+              Remove Host
+            </button>
+          </div>
+          <hr class="rounded border-4 bg-gray-300 my-4" />
+        </ng-container>
+      </ng-container>
+
+      <div class="form-group">
+        <button
+          [disabled]="loading"
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none"
+        >
+          <span
+            *ngIf="loading"
+            class="spinner-border spinner-border-sm mr-1"
+          ></span>
+          Book
+        </button>
+        <a
+          routerLink="/home"
+          class="btn btn-link inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+        >
+          Cancel
+        </a>
+      </div>
+    </form>
+  </div>
+</div>

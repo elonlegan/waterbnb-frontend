@@ -1,0 +1,98 @@
+﻿<div class="py-4">
+  <div class="container">
+    <h1>Hi {{ account.name }}!</h1>
+    <p class="mb-4">Check the rooms for your next vacation</p>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <app-city-input
+        [formGroup]="form"
+        [formControls]="f"
+        [submitted]="submitted"
+      >
+      </app-city-input>
+
+      <div class="form-row">
+        <div class="form-group col-3">
+          <label class="block text-gray-700 text-sm font-bold mb-2">
+            Arrival Date
+          </label>
+          <input
+            type="date"
+            formControlName="arrivalDate"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.arrivalDate.errors }"
+            min="{{ today | date : 'yyyy-MM-dd' }}"
+            [max]="f.departureDate.value"
+          />
+          <div
+            *ngIf="submitted && f.arrivalDate.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f.arrivalDate.errors.required">
+              Arrival Date is required
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group col-3">
+          <label class="block text-gray-700 text-sm font-bold mb-2">
+            Departure Date
+          </label>
+          <input
+            type="date"
+            formControlName="departureDate"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.departureDate.errors }"
+            [min]="f.arrivalDate.value"
+          />
+          <div
+            *ngIf="submitted && f.departureDate.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f.departureDate.errors.required">
+              Departure Date is required
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group col-3">
+          <label class="block text-gray-700 text-sm font-bold mb-2">
+            Host Number
+          </label>
+          <input
+            type="number"
+            formControlName="hostNumber"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.hostNumber.errors }"
+          />
+          <div
+            *ngIf="submitted && f.hostNumber.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f.hostNumber.errors.required">
+              Host Number is required
+            </div>
+            <div *ngIf="f.hostNumber.errors.min">The minimum host is 1</div>
+          </div>
+        </div>
+
+        <div class="form-group col-3 flex items-end">
+          <button
+            [disabled]="loading"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none w-full"
+          >
+            <span
+              *ngIf="loading"
+              class="spinner-border spinner-border-sm mr-1"
+            ></span>
+            Search
+          </button>
+        </div>
+      </div>
+    </form>
+    <div class="hotel-grid">
+      <ng-container *ngFor="let room of rooms">
+        <app-room-card [room]="room" [params]="this.form.value"></app-room-card>
+      </ng-container>
+    </div>
+  </div>
+</div>

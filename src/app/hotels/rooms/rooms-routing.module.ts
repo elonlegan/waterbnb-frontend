@@ -16,13 +16,13 @@ const routes: Routes = [
     path: 'add',
     component: AddEditComponent,
     canActivate: [AuthGuard],
-    data: { roles: [Role.Admin] },
+    data: { roles: [Role.Admin, Role.TravelAgency] },
   },
   {
     path: 'edit/:id',
     component: AddEditComponent,
     canActivate: [AuthGuard],
-    data: { roles: [Role.Admin] },
+    data: { roles: [Role.Admin, Role.TravelAgency] },
   },
 ];
 

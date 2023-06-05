@@ -8,7 +8,6 @@ import { JwtInterceptor, ErrorInterceptor, appInitializer } from './helpers';
 import { AccountService } from './services';
 import { AppComponent } from './app.component';
 import { AlertComponent } from './components';
-import { HomeComponent } from './home';
 import { SharedModule } from './shared/shared.module';
 
 @NgModule({
@@ -20,7 +19,7 @@ import { SharedModule } from './shared/shared.module';
     SharedModule,
     FormsModule,
   ],
-  declarations: [AppComponent, AlertComponent, HomeComponent],
+  declarations: [AppComponent, AlertComponent],
   providers: [
     {
       provide: APP_INITIALIZER,
