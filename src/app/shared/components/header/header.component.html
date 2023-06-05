@@ -28,6 +28,13 @@
             Profile
           </a>
           <a
+            routerLink="/bookings"
+            routerLinkActive="active"
+            class="py-4 px-2 text-gray-400 font-semibold transition duration-300 nav-item nav-link"
+          >
+            Bookings
+          </a>
+          <a
             *ngIf="account.role === Role.Admin"
             routerLink="/accounts"
             routerLinkActive="active"
@@ -79,6 +86,13 @@
           class="cursor-pointer text-gray-400 block px-3 py-2 rounded-md text-base font-medium transition duration-300 nav-item nav-link"
         >
           Profile
+        </a>
+        <a
+          routerLink="/bookings"
+          routerLinkActive="active"
+          class="cursor-pointer text-gray-400 block px-3 py-2 rounded-md text-base font-medium transition duration-300 nav-item nav-link"
+        >
+          Bookings
         </a>
         <a
           *ngIf="account.role === Role.Admin"

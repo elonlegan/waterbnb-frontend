@@ -8,6 +8,8 @@ const accountModule = () =>
   import('./account/account.module').then((x) => x.AccountModule);
 const accountsModule = () =>
   import('./accounts/accounts.module').then((x) => x.AccountsModule);
+const bookingsModule = () =>
+  import('./bookings/bookings.module').then((x) => x.BookingsModule);
 const profileModule = () =>
   import('./profile/profile.module').then((x) => x.ProfileModule);
 const hotelsModule = () =>
@@ -40,6 +42,11 @@ const routes: Routes = [
     loadChildren: accountsModule,
     canActivate: [AuthGuard],
     data: { roles: [Role.Admin] },
+  },
+  {
+    path: 'bookings',
+    loadChildren: bookingsModule,
+    canActivate: [AuthGuard],
   },
 
   // otherwise redirect to home

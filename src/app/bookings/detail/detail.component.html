@@ -1,0 +1,151 @@
+﻿<div class="p-4">
+  <div class="container">
+    <h1 class="text-3xl font-bold leading-7 mb-4 text-center">
+      {{ booking.room.name }} Booking Info
+    </h1>
+    <div class="flex justify-between">
+      <h2 class="text-xl mb-1">Emergency Contact</h2>
+    </div>
+    <ng-container *ngFor="let emergencyContact of booking.emergencyContacts">
+      <div class="form-row">
+        <div class="form-group col">
+          <label class="block text-gray-700 text-sm font-bold mb-2">
+            First Name
+          </label>
+          <input
+            type="text"
+            [value]="emergencyContact.firstName"
+            disabled
+            class="form-control"
+          />
+        </div>
+
+        <div class="form-group col">
+          <label class="block text-gray-700 text-sm font-bold mb-2">
+            Last Name
+          </label>
+          <input
+            type="text"
+            [value]="emergencyContact.lastName"
+            disabled
+            class="form-control"
+          />
+        </div>
+
+        <div class="form-group col">
+          <label class="block text-gray-700 text-sm font-bold mb-2">
+            Phone Number
+          </label>
+          <input
+            type="text"
+            [value]="emergencyContact.phoneNumber"
+            disabled
+            class="form-control"
+          />
+        </div>
+      </div>
+      <hr class="rounded border-4 bg-gray-300 my-4" />
+    </ng-container>
+
+    <div class="flex justify-between">
+      <h2 class="text-xl mb-1">Hosts</h2>
+    </div>
+    <ng-container *ngFor="let host of booking.hosts" [formGroupName]="i">
+      <div class="form-row">
+        <div class="form-group col">
+          <label class="block text-gray-700 text-sm font-bold mb-2">
+            First Name
+          </label>
+          <input
+            type="text"
+            [value]="host.firstName"
+            disabled
+            class="form-control"
+          />
+        </div>
+        <div class="form-group col">
+          <label class="block text-gray-700 text-sm font-bold mb-2">
+            Last Name
+          </label>
+          <input
+            type="text"
+            [value]="host.lastName"
+            disabled
+            class="form-control"
+          />
+        </div>
+        <div class="form-group col">
+          <label class="block text-gray-700 text-sm font-bold mb-2">
+            Birth Date
+          </label>
+          <input
+            type="date"
+            [value]="host.birthDate | date : 'yyyy-MM-dd'"
+            disabled
+            class="form-control"
+          />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col">
+          <label class="block text-gray-700 text-sm font-bold mb-2">
+            Gender
+          </label>
+          <input
+            type="text"
+            [value]="host.gender"
+            disabled
+            class="form-control"
+          />
+        </div>
+        <div class="form-group col">
+          <label class="block text-gray-700 text-sm font-bold mb-2">
+            Document Type
+          </label>
+          <input
+            type="text"
+            [value]="host.documentType"
+            disabled
+            class="form-control"
+          />
+        </div>
+        <div class="form-group col">
+          <label class="block text-gray-700 text-sm font-bold mb-2">
+            Document Number
+          </label>
+          <input
+            type="number"
+            [value]="host.documentNumber"
+            disabled
+            class="form-control"
+          />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col">
+          <label class="block text-gray-700 text-sm font-bold mb-2">
+            Email
+          </label>
+          <input
+            type="text"
+            [value]="host.email"
+            disabled
+            class="form-control"
+          />
+        </div>
+        <div class="form-group col">
+          <label class="block text-gray-700 text-sm font-bold mb-2">
+            Phone Number
+          </label>
+          <input
+            type="text"
+            [value]="host.phoneNumber"
+            disabled
+            class="form-control"
+          />
+        </div>
+      </div>
+      <hr class="rounded border-4 bg-gray-300 my-4" />
+    </ng-container>
+  </div>
+</div>

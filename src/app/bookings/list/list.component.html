@@ -1,0 +1,35 @@
+﻿<div class="p-4">
+  <div class="container">
+    <h1 class="text-3xl font-bold leading-7 mb-4 text-center">bookings</h1>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th style="width: 30%">Room</th>
+          <th style="width: 30%">Arrival Date</th>
+          <th style="width: 30%">Departure Date</th>
+          <th style="width: 10%"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let booking of bookings">
+          <td>{{ booking.room.name }}</td>
+          <td>{{ booking.arrivalDate | date }}</td>
+          <td>{{ booking.departureDate | date }}</td>
+          <td style="white-space: nowrap">
+            <a
+              routerLink="detail/{{ booking.id }}"
+              class="btn btn-sm btn-primary mr-1 font-bold"
+            >
+              View
+            </a>
+          </td>
+        </tr>
+        <tr *ngIf="!bookings">
+          <td colspan="4" class="text-center">
+            <span class="spinner-border spinner-border-lg align-center"></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
