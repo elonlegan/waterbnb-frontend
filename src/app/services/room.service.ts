@@ -14,6 +14,10 @@ export class RoomService {
     return this.http.get<Room[]>(baseUrl);
   }
 
+  getByHotel(hotelId: string) {
+    return this.http.get<Room[]>(`${baseUrl}/hotel/${hotelId}`);
+  }
+
   getById(id: string) {
     return this.http.get<Room>(`${baseUrl}/${id}`);
   }

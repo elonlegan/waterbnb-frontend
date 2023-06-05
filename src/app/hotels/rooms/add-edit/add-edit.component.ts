@@ -60,7 +60,6 @@ export class AddEditComponent implements OnInit {
       .pipe(first())
       .subscribe((roomTypes) => {
         this.roomTypes = roomTypes;
-        this.loader = false;
       });
 
     this.id = this.route.snapshot.params['id'];
@@ -137,7 +136,7 @@ export class AddEditComponent implements OnInit {
     try {
       await this.handleImageUpload();
       this.roomService
-        .create(this.form.value)
+        .create({ ...this.form.value, hotel: this.hotel.id })
         .pipe(first())
         .subscribe({
           next: () => {

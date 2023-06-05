@@ -36,7 +36,7 @@ export class RoomsComponent implements OnInit {
       });
 
     this.roomService
-      .getAll()
+      .getByHotel(this.hotelId)
       .pipe(first())
       .subscribe((rooms) => (this.rooms = rooms));
   }
