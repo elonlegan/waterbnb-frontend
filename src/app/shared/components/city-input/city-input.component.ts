@@ -47,8 +47,12 @@ export class CityInputComponent {
     });
 
     this.formControls['state'].valueChanges.subscribe((state) => {
+      console.log('state', state);
+      console.log('city', this.formControls['city'].value);
+
       this.formControls['city'].reset();
       this.formControls['city'].disable();
+
       if (state) {
         this.cities = this.citiesService.getCitiesByState(
           this.formControls['country'].value,

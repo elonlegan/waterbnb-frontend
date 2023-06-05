@@ -9,6 +9,7 @@ import { RoomCardComponent } from './components/room-card/room-card.component';
 import { TruncatePipe } from './pipes/truncate.pipe';
 import { CitySearchFilterPipe } from './pipes/city-search-filter.pipe';
 import { CityInputComponent } from './components/city-input/city-input.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { CityInputComponent } from './components/city-input/city-input.component
     TruncatePipe,
     CitySearchFilterPipe,
     CityInputComponent,
+    LoaderComponent,
   ],
   imports: [CommonModule, RouterModule, ReactiveFormsModule],
   exports: [
@@ -29,6 +31,7 @@ import { CityInputComponent } from './components/city-input/city-input.component
     TruncatePipe,
     CityInputComponent,
     CitySearchFilterPipe,
+    LoaderComponent,
   ],
 })
 export class SharedModule {}

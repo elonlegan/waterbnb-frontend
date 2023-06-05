@@ -23,6 +23,7 @@ export class AddEditComponent implements OnInit {
   id: string;
   isAddMode: boolean;
   loading = false;
+  loader = true;
   submitted = false;
   isValidImage: boolean = false;
   image: any;
@@ -31,6 +32,7 @@ export class AddEditComponent implements OnInit {
   hotel: Hotel;
 
   cities = [];
+  roomTypes = [];
 
   constructor(
     private formBuilder: UntypedFormBuilder,
@@ -39,8 +41,7 @@ export class AddEditComponent implements OnInit {
     private roomService: RoomService,
     private alertService: AlertService,
     private http: HttpClient,
-    private hotelService: HotelService,
-    private citiesService: CitiesService
+    private hotelService: HotelService
   ) {}
 
   ngOnInit() {
@@ -51,6 +52,15 @@ export class AddEditComponent implements OnInit {
       .pipe(first())
       .subscribe((hotel) => {
         this.hotel = hotel;
+        this.loader = false;
+      });
+
+    this.roomService
+      .getRoomTypes()
+      .pipe(first())
+      .subscribe((roomTypes) => {
+        this.roomTypes = roomTypes;
+        this.loader = false;
       });
 
     this.id = this.route.snapshot.params['id'];
@@ -62,10 +72,14 @@ export class AddEditComponent implements OnInit {
       country: ['', Validators.required],
       state: ['', Validators.required],
       city: ['', Validators.required],
+      type: ['', Validators.required],
+      address: ['', Validators.required],
+      price: ['', [Validators.required, Validators.min(1)]],
       imageUrl: ['', this.isAddMode ? '' : Validators.nullValidator],
     });
 
     if (!this.isAddMode) {
+      this.loader = true;
       this.roomService
         .getById(this.id)
         .pipe(first())
@@ -74,6 +88,7 @@ export class AddEditComponent implements OnInit {
             ...room,
             imageUrl: '',
           });
+          this.loader = false;
         });
     }
   }

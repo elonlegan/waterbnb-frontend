@@ -1,90 +1,151 @@
-﻿<div class="p-4">
-  <div class="container">
-    <h1 *ngIf="isAddMode" class="text-3xl font-bold leading-7 mb-4 text-center">
-      Create {{ hotel.name }}'s Room
-    </h1>
-    <h1
-      *ngIf="!isAddMode"
-      class="text-3xl font-bold leading-7 mb-4 text-center"
-    >
-      Edit Room
-    </h1>
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <div class="form-row">
-        <div class="form-group col">
-          <label class="block text-gray-700 text-sm font-bold mb-2">
-            Name
-          </label>
-          <input
-            type="text"
-            formControlName="name"
-            class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
-          />
-          <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
-            <div *ngIf="f.name.errors.required">Name is required</div>
+﻿<app-loader *ngIf="loader; else content"></app-loader>
+
+<ng-template #content>
+  <div class="p-4">
+    <div class="container">
+      <h1
+        *ngIf="isAddMode"
+        class="text-3xl font-bold leading-7 mb-4 text-center"
+      >
+        Create {{ hotel.name }}'s Room
+      </h1>
+      <h1
+        *ngIf="!isAddMode"
+        class="text-3xl font-bold leading-7 mb-4 text-center"
+      >
+        Edit Room
+      </h1>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-row">
+          <div class="form-group col">
+            <label class="block text-gray-700 text-sm font-bold mb-2">
+              Name
+            </label>
+            <input
+              type="text"
+              formControlName="name"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
+            />
+            <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+              <div *ngIf="f.name.errors.required">Name is required</div>
+            </div>
+          </div>
+          <div class="form-group col">
+            <label class="block text-gray-700 text-sm font-bold">
+              Image
+              <span *ngIf="!isAddMode"
+                >(leave empty to keep the same image)</span
+              >
+            </label>
+
+            <input
+              (change)="onFileSelect($event)"
+              type="file"
+              formControlName="imageUrl"
+              class="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-clip-padding ps-3 py-[0.32rem] text-base font-normal text-neutral-700 transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-neutral-300 file:ps-3 file:py-[0.32rem] file:transition file:duration-150 file:ease-in-out file:[border-inline-end-width:1px] file:[margin-inline-end:0.75rem] hover:file:bg-neutral-200 focus:border-primary focus:text-neutral-700 focus:shadow-[0_0_0_1px] focus:shadow-primary focus:outline-none border-neutral-600 text-neutral-200 file:bg-neutral-700 bg-white file:text-neutral-100"
+              accept="image/*"
+              [ngClass]="{
+                'is-invalid': submitted && f.imageUrl.errors
+              }"
+            />
           </div>
         </div>
-        <div class="form-group col">
-          <label class="block text-gray-700 text-sm font-bold">
-            Image
-            <span *ngIf="!isAddMode">(leave empty to keep the same image)</span>
-          </label>
-
-          <input
-            (change)="onFileSelect($event)"
-            type="file"
-            formControlName="imageUrl"
-            class="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-clip-padding ps-3 py-[0.32rem] text-base font-normal text-neutral-700 transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-neutral-300 file:ps-3 file:py-[0.32rem] file:transition file:duration-150 file:ease-in-out file:[border-inline-end-width:1px] file:[margin-inline-end:0.75rem] hover:file:bg-neutral-200 focus:border-primary focus:text-neutral-700 focus:shadow-[0_0_0_1px] focus:shadow-primary focus:outline-none border-neutral-600 text-neutral-200 file:bg-neutral-700 bg-white file:text-neutral-100"
-            accept="image/*"
-            [ngClass]="{
-              'is-invalid': submitted && f.imageUrl.errors
-            }"
-          />
-        </div>
-      </div>
-      <app-city-input
-        formControlName="city"
-        [formGroup]="form"
-        [formControls]="f"
-        [submitted]="submitted"
-      >
-      </app-city-input>
-
-      <div class="form-row">
-        <div class="form-group col">
-          <label class="block text-gray-700 text-sm font-bold mb-2">
-            Description
-          </label>
-          <textarea
-            name="description"
-            cols="30"
-            rows="10"
-            formControlName="description"
-            class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f.description.errors }"
-          ></textarea>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <button
-          [disabled]="loading"
-          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none"
+        <app-city-input
+          [formGroup]="form"
+          [formControls]="f"
+          [submitted]="submitted"
         >
-          <span
-            *ngIf="loading"
-            class="spinner-border spinner-border-sm mr-1"
-          ></span>
-          Save
-        </button>
-        <a
-          routerLink="/admin/hotels"
-          class="btn btn-link inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-        >
-          Cancel
-        </a>
-      </div>
-    </form>
+        </app-city-input>
+
+        <div class="form-row">
+          <div class="form-group col-6">
+            <label class="block text-gray-700 text-sm font-bold mb-2">
+              Address
+            </label>
+            <input
+              type="text"
+              formControlName="address"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.address.errors }"
+            />
+            <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+              <div *ngIf="f.address.errors.required">Address is required</div>
+            </div>
+          </div>
+
+          <div class="form-group col-3">
+            <label class="block text-gray-700 text-sm font-bold mb-2">
+              Room Type
+            </label>
+            <select
+              formControlName="type"
+              class="form-control border rounded w-full text-gray-700 leading-tight focus:outline-none"
+              [ngClass]="{
+                'is-invalid': submitted && f.type.errors
+              }"
+            >
+              <option [value]="roomType" *ngFor="let roomType of roomTypes">
+                {{ roomType }}
+              </option>
+            </select>
+            <div *ngIf="submitted && f.type.errors" class="invalid-feedback">
+              <div *ngIf="f.type.errors.required">Country is required</div>
+            </div>
+          </div>
+
+          <div class="form-group col-3">
+            <label class="block text-gray-700 text-sm font-bold mb-2">
+              Total night price
+            </label>
+            <input
+              type="number"
+              formControlName="price"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.price.errors }"
+            />
+            <div *ngIf="submitted && f.price.errors" class="invalid-feedback">
+              <div *ngIf="f.price.errors.required">Price is required</div>
+              <div *ngIf="f.price.errors.min">The minimum price is 1</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col">
+            <label class="block text-gray-700 text-sm font-bold mb-2">
+              Description
+            </label>
+            <textarea
+              name="description"
+              cols="30"
+              rows="10"
+              formControlName="description"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.description.errors }"
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button
+            [disabled]="loading"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none"
+          >
+            <span
+              *ngIf="loading"
+              class="spinner-border spinner-border-sm mr-1"
+            ></span>
+            Save
+          </button>
+          <a
+            routerLink="/admin/hotels"
+            class="btn btn-link inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+          >
+            Cancel
+          </a>
+        </div>
+      </form>
+    </div>
   </div>
-</div>
+</ng-template>

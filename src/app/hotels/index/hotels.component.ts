@@ -9,6 +9,7 @@ export class HotelsComponent implements OnInit {
   Role = Role;
   hotels: Hotel[];
   account: Account;
+  loader: boolean = true;
 
   constructor(
     private hotelService: HotelService,
@@ -21,7 +22,10 @@ export class HotelsComponent implements OnInit {
     this.hotelService
       .getAll()
       .pipe(first())
-      .subscribe((hotels) => (this.hotels = hotels));
+      .subscribe((hotels) => {
+        this.hotels = hotels;
+        this.loader = false;
+      });
   }
 
   deleteHotel(id: string) {

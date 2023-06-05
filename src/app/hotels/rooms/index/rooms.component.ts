@@ -13,6 +13,7 @@ export class RoomsComponent implements OnInit {
 
   hotelId: string;
   hotel: Hotel;
+  loader: boolean = true;
 
   constructor(
     private roomService: RoomService,
@@ -31,6 +32,7 @@ export class RoomsComponent implements OnInit {
       .pipe(first())
       .subscribe((hotel) => {
         this.hotel = hotel;
+        this.loader = false;
       });
 
     this.roomService

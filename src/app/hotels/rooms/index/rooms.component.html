@@ -1,23 +1,26 @@
-﻿<div class="p-4">
-  <div class="container">
-    <h1 class="text-3xl font-bold leading-7 mb-4 text-center">
-      {{ hotel.name }}'s Rooms
-    </h1>
-    <a
-      *ngIf="account.role === Role.Admin"
-      routerLink="add"
-      class="btn btn-sm btn-success mb-4 text-white font-bold py-2 px-4 rounded"
-    >
-      Create Room
-    </a>
-    <div class="room-grid">
-      <ng-container *ngFor="let room of rooms">
-        <app-room-card
-          [room]="room"
-          [account]="account"
-          (delete)="deleteRoom($event)"
-        ></app-room-card>
-      </ng-container>
+﻿<app-loader *ngIf="loader; else content"></app-loader>
+<ng-template #content>
+  <div class="p-4">
+    <div class="container">
+      <h1 class="text-3xl font-bold leading-7 mb-4 text-center">
+        {{ hotel.name }}'s Rooms
+      </h1>
+      <a
+        *ngIf="account.role === Role.Admin"
+        routerLink="add"
+        class="btn btn-sm btn-success mb-4 text-white font-bold py-2 px-4 rounded"
+      >
+        Create Room
+      </a>
+      <div class="room-grid">
+        <ng-container *ngFor="let room of rooms">
+          <app-room-card
+            [room]="room"
+            [account]="account"
+            (delete)="deleteRoom($event)"
+          ></app-room-card>
+        </ng-container>
+      </div>
     </div>
   </div>
-</div>
+</ng-template>

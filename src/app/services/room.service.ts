@@ -18,6 +18,10 @@ export class RoomService {
     return this.http.get<Room>(`${baseUrl}/${id}`);
   }
 
+  getRoomTypes() {
+    return this.http.get<any[]>(`${baseUrl}/room-types`);
+  }
+
   create(params) {
     return this.http.post(baseUrl, params);
   }
