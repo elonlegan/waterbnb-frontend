@@ -10,6 +10,7 @@ export class Room {
   address: string;
   type: string;
   hotel: Hotel;
+  maxHost: number;
   imageUrl?: string;
   description?: string;
   isDeleting?: boolean;

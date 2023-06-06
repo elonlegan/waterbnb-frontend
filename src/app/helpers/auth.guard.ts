@@ -19,7 +19,9 @@ export class AuthGuard {
       if (route.data.roles && !route.data.roles.includes(account.role)) {
         // role not authorized so redirect to home page
         this.router.navigate([
-          account.role === Role.Admin ? '/home' : '/hotels',
+          account.role === Role.Admin || account.role === Role.TravelAgency
+            ? '/hotels'
+            : '/home',
         ]);
         return false;
       }
