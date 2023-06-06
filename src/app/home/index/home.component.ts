@@ -10,6 +10,7 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({ templateUrl: 'home.component.html' })
 export class HomeComponent implements OnInit {
@@ -22,13 +23,19 @@ export class HomeComponent implements OnInit {
 
   rooms: Room[];
 
+  params: Params;
   constructor(
     private formBuilder: UntypedFormBuilder,
     private accountService: AccountService,
     private hotelService: HotelService,
     private roomService: RoomService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {
+    this.route.queryParams.subscribe((params) => {
+      this.params = params;
+    });
     this.form = this.formBuilder.group({
       country: ['', Validators.required],
       state: ['', Validators.required],
@@ -36,6 +43,17 @@ export class HomeComponent implements OnInit {
       arrivalDate: ['', Validators.required],
       departureDate: ['', Validators.required],
       hostNumber: ['', [Validators.required, Validators.min(1)]],
+    });
+    this.form.patchValue(this.params);
+    this.onSubmit();
+
+    this.form.valueChanges.subscribe((value) => {
+      console.log(value);
+      this.router.navigate([], {
+        relativeTo: this.route,
+        queryParams: value,
+        queryParamsHandling: 'merge', // remove to replace all query params by provided
+      });
     });
   }
 
