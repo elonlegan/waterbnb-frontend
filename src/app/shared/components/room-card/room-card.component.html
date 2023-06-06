@@ -5,7 +5,22 @@
     alt="room image"
   />
   <div class="px-6 py-4">
-    <h3 class="font-bold text-3xl mb-2">{{ room.name }}</h3>
+    <div class="flex justify-between">
+      <h3 class="font-bold text-3xl mb-2">{{ room.name }}</h3>
+      <ng-toggle
+        *ngIf="
+          account.role === Role.Admin || account.role === Role.TravelAgency
+        "
+        [(ngModel)]="room.available"
+        (ngModelChange)="onToggleAvailable($event)"
+        [labels]="{
+        unchecked: 'unavailable',
+        checked: 'available',
+      }"
+        [height]="35"
+        [width]="85"
+      ></ng-toggle>
+    </div>
     <p class="text-gray-700 text-base">
       {{ room.country }}, {{ room.state }},
       <strong>

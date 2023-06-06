@@ -11,6 +11,7 @@ export class Room {
   type: string;
   hotel: Hotel;
   maxHost: number;
+  available: boolean;
   imageUrl?: string;
   description?: string;
   isDeleting?: boolean;

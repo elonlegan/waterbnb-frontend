@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 
 import { Account, Role, Room } from '@app/models';
-import { AccountService } from '@app/services';
+import { AccountService, AlertService, RoomService } from '@app/services';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-room-card',
@@ -15,7 +16,11 @@ export class RoomCardComponent implements OnInit {
   @Input() params: any;
   @Output() delete: EventEmitter<any> = new EventEmitter();
 
-  constructor(private accountService: AccountService) {
+  constructor(
+    private accountService: AccountService,
+    private roomService: RoomService,
+    private alertService: AlertService
+  ) {
     this.accountService.account.subscribe((res) => (this.account = res));
   }
 
@@ -23,5 +28,25 @@ export class RoomCardComponent implements OnInit {
 
   onDelete(id: string) {
     this.delete.emit(id);
+  }
+
+  onToggleAvailable(event) {
+    try {
+      this.roomService
+        .update(this.room.id, { available: event })
+        .pipe(first())
+        .subscribe({
+          next: () => {
+            this.alertService.success('Update successful', {
+              keepAfterRouteChange: true,
+            });
+          },
+          error: (error) => {
+            this.alertService.error(error);
+          },
+        });
+    } catch (error) {
+      this.alertService.error(error);
+    }
   }
 }

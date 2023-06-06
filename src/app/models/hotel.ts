@@ -5,6 +5,7 @@ export class Hotel {
   name: string;
   description: string;
   imageUrl: string;
+  available: boolean;
   rooms?: Room[];
   isDeleting?: boolean;
 }

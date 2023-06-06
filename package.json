@@ -23,6 +23,7 @@
     "countrycitystatejson": "^21.3.2702",
     "moment": "^2.29.1",
     "ng-multiselect-dropdown": "^0.3.9",
+    "ng-toggle-button": "^1.5.1",
     "rxjs": "^6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.13.0"
