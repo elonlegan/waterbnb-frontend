@@ -33,8 +33,30 @@ export class CityInputComponent {
   }
 
   ngOnInit() {
-    this.formControls['state'].disable();
-    this.formControls['city'].disable();
+    console.log();
+
+    if (
+      this.formControls['country'].value &&
+      this.formControls['state'].value &&
+      this.formControls['state'].value
+    ) {
+      this.states = this.citiesService.getStatesByCountry(
+        this.formControls['country'].value
+      );
+      this.formControls['state'].enable();
+
+      this.cities = this.citiesService.getCitiesByState(
+        this.formControls['country'].value,
+        this.formControls['state'].value
+      );
+      if (!this.cities.length) {
+        this.cities = [this.formControls['state'].value];
+      }
+      this.formControls['city'].enable();
+    } else {
+      this.formControls['state'].disable();
+      this.formControls['city'].disable();
+    }
 
     this.formControls['country'].valueChanges.subscribe((country) => {
       this.formControls['state'].reset();
@@ -47,6 +69,8 @@ export class CityInputComponent {
     });
 
     this.formControls['state'].valueChanges.subscribe((state) => {
+      console.log(state);
+
       this.formControls['city'].reset();
       this.formControls['city'].disable();
 
